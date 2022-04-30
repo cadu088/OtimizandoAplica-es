@@ -1,5 +1,5 @@
 import { MovieCard } from "./MovieCard";
-
+import { memo } from 'react';
 interface ContentProps {
   selectedGenre: {
     id: number;
@@ -19,7 +19,7 @@ interface ContentProps {
   }>;
 }
 
-export function Content({ selectedGenre, movies }: ContentProps) {
+function ContentComponent({ selectedGenre, movies }: ContentProps) {
   return (
     <div className="container">
       <header>
@@ -36,3 +36,7 @@ export function Content({ selectedGenre, movies }: ContentProps) {
     </div>
   )
 }
+
+export const Content = memo(ContentComponent, (prevProps, nextProps) => {
+	return Object.is(prevProps, nextProps);
+});
